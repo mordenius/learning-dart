@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:learning_dart/views/verify_email_view.dart';
 import './views/register_view.dart';
 import './views/login_view.dart';
 import './firebase_options.dart';
@@ -30,10 +31,10 @@ class MyApp extends StatelessWidget {
               case ConnectionState.done:
                 final emailVerified =
                     FirebaseAuth.instance.currentUser?.emailVerified ?? false;
-                if (emailVerified) {
-                  print('Email verified');
-                } else {
-                  print('You need to verify your email first');
+                if (!emailVerified) {
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => const VerifyEmailView()));
+                  return const VerifyEmailView();
                 }
 
                 return Scaffold(
